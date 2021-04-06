@@ -1,0 +1,7 @@
+version: '2.2'
+services:
+  yolo-django:
+    container_name: yolo-django
+    build: .
+    ports:
+      - "8080:8080"

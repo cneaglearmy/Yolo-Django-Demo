@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	  <a class="navbar-brand" href="/">Yolo Demo</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+
+	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	    <ul class="navbar-nav mr-auto">
+	      <li class="nav-item dropdown">
+	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	          Project
+	        </a>
+	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+	          <a class="dropdown-item" href="#">Project 1</a>
+	          <a class="dropdown-item" href="#">Project 2</a>
+	          <a class="dropdown-item" href="#">Project 3</a>
+	        </div>
+	      </li>
+	    </ul>
+	  </div>
+	</nav>
+
+	<nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item active" aria-current="page">Project 1</li>
+	  </ol>
+	</nav>
+	<div style="text-align: center;  margin: auto;
+	    padding: 20px;
+	    background-color: aliceblue;">
+		<form method="post" enctype="multipart/form-data">
+	    	{% csrf_token %}
+	    	<input type="file" name="myfile" required>
+	    	<button class="btn btn-success upload" type="submit">Tải ảnh lên</button>
+	  	</form>
+	  {% if errors %}
+	     <p class="text-primary">{{ errors }}</p>
+	  {% endif %}
+	  {% if uploaded_file_url %}
+	    <!-- <p>Ảnh đã tải: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p> -->
+	  {% endif %}
+	</div>
+	  {% if uploaded_file_url %}
+	<div class="alert alert-success" role="alert" style="margin-top: 10px;">
+	  Hoàn tất!
+	</div>
+	<div class="img row">
+		<div class="col-sm-6">
+			<img src="{{ uploaded_file_url }}" style="margin-top: 10px;">
+			<h5>Ảnh gốc</h5>
+		</div>
+		<div class="col-sm-6">
+			<img src="{{ yoloImg }}" style="margin-top: 10px;">
+			<h5>Ảnh đã nhận dạng</h5>
+		</div>
+	</div>
+	 {% else %}
+	<div class="loading">
+		<img src="/media/gif/loading.gif">
+		<h4 style="color: blue">Đang xử lý ...</h4>
+	</div>
+</div>
+{% endif %}
+
+{% endblock %}

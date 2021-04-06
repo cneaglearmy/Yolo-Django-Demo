@@ -1,0 +1,17 @@
+*{
+	
+}
+
+div.img{
+    text-align: center;
+	position: relative;
+}
+
+div.img img{
+	width: 100%;
+}
+
+div.loading{
+    display: none;
+    text-align: center;
+}
